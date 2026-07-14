@@ -1,0 +1,87 @@
+$date
+	Tue Jul 14 17:40:53 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module test $end
+$var wire 4 ! out [3:0] $end
+$var reg 4 " in [3:0] $end
+$var integer 32 # i [31:0] $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 #
+b0 "
+b0 !
+$end
+#5
+b1 !
+b1 "
+b1 #
+#10
+b11 !
+b10 "
+b10 #
+#15
+b10 !
+b11 "
+b11 #
+#20
+b110 !
+b100 "
+b100 #
+#25
+b111 !
+b101 "
+b101 #
+#30
+b101 !
+b110 "
+b110 #
+#35
+b100 !
+b111 "
+b111 #
+#40
+b1100 !
+b1000 "
+b1000 #
+#45
+b1101 !
+b1001 "
+b1001 #
+#50
+b1111 !
+b1010 "
+b1010 #
+#55
+b1110 !
+b1011 "
+b1011 #
+#60
+b1010 !
+b1100 "
+b1100 #
+#65
+b1011 !
+b1101 "
+b1101 #
+#70
+b1001 !
+b1110 "
+b1110 #
+#75
+b1000 !
+b1111 "
+b1111 #
+#80
+b10000 #
+#90
