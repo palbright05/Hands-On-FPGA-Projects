@@ -5,6 +5,13 @@
     - input logic clk_100MHz
 - The always_ff keyword to explicitly tell the synthesis tool to create sequential flip-flop logic
     -   always_ff @ (posedge clk) begin end
+- (* ASYNCHRONOUS_REG = "TRUE" *)
+    - This attribute prevents synthesis from optimizing away the redundant registers
+    - This ensures they are placed in the same slice to reduce signal travel time
+- Shift register
+    - reg [1:0] sync_ff = 2'b00;
+    - sync_regs <= {sync_ff[0], async_in};
+
 ## Docker
 
 ## TCL Script
@@ -28,14 +35,15 @@
     - Clock created by toggling a logic signal. Introduces phase noise and skew
 - To generate clocks we use PLL and Mixed Mode Clock Manager MMCM
     - This can be done with the GUI clock wizard or using Xilinx Paramterized Macros (primitives / XPM)
-    - We need to define constraints for our derived clocks
-        - derive_pll_clocks
 - Global Clock Buffer
     - The output of the MMCM cannot drive thousands of flip flops directly
     - Distributes the signal across the chips dedicated low-skew clocking backbone
     - Without the BUFG primitives your clock would travel through regular routing wires accumulating delay
     - Example: BUFG clkout0_buf (.I(name_clk_i), .O(name_clk_o));
-
+- (* ASYNCHRONOUS_REG = "TRUE" *)
+    - This attribute prevents synthesis from optimizing away the redundant registers
+    - This ensures they are placed in the same slice to reduce signal travel time
+- Use 
 # Constraints
 - The FPGA doesnt inherently know what the signal named clk in your code is connected to on the board. XDC acts as the bridge between your logical names and the physical pins
 -   Constraints are set using the pin IOStandard and the pin location (or in single line)
