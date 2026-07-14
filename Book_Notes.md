@@ -24,6 +24,17 @@
 ## Vivado 
 - You can start vivado from the command line in the gui mode
     - vivado -mode gui -source MyTCL.tcl
+- Gated Clock
+    - Clock created by toggling a logic signal. Introduces phase noise and skew
+- To generate clocks we use PLL and Mixed Mode Clock Manager MMCM
+    - This can be done with the GUI clock wizard or using Xilinx Paramterized Macros (primitives / XPM)
+    - We need to define constraints for our derived clocks
+        - derive_pll_clocks
+- Global Clock Buffer
+    - The output of the MMCM cannot drive thousands of flip flops directly
+    - Distributes the signal across the chips dedicated low-skew clocking backbone
+    - Without the BUFG primitives your clock would travel through regular routing wires accumulating delay
+    - Example: BUFG clkout0_buf (.I(name_clk_i), .O(name_clk_o));
 
 # Constraints
 - The FPGA doesnt inherently know what the signal named clk in your code is connected to on the board. XDC acts as the bridge between your logical names and the physical pins
@@ -33,3 +44,5 @@
     - set_property -dict {PACKAGE_PIN A16 IOSTANDARD LVCMOS33} [get_ports {clk}];
 - Create a clock constraint <clock_name> <clock_period> <clock_duty> this tells Vivado implementation it must ensure signals can travel through your logic within 10ns to meet timing requirements
     - create_clock -add -name sys_clk_pin -period 10.00 -waveform {0,5} [get_ports {clk}];
+- Derive constraints for MMCM/PLL outputs
+    - derive_pll_clocks
