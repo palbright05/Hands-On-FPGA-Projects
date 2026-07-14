@@ -43,7 +43,9 @@
 - (* ASYNCHRONOUS_REG = "TRUE" *)
     - This attribute prevents synthesis from optimizing away the redundant registers
     - This ensures they are placed in the same slice to reduce signal travel time
-- Use 
+- Use synchronizers to help with Cross Domain Clocks
+    - This allows metastability issues to settle
+
 # Constraints
 - The FPGA doesnt inherently know what the signal named clk in your code is connected to on the board. XDC acts as the bridge between your logical names and the physical pins
 -   Constraints are set using the pin IOStandard and the pin location (or in single line)
