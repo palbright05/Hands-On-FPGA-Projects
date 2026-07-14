@@ -1,0 +1,53 @@
+// Binary to Gray conversion
+function automatic logic [3:0] bin2gray (input logic [3:0] bin);
+    return bin ^ (bin >> 1);
+endfunction
+
+// Gray to Binary conversion (for 4-bit pointers)
+function automatic logic [3:0] gray2bin (input logic [3:0] gray);
+    logic [3:0] bin;
+    bin[3] = gray[3];
+    bin[2] = gray[3] ^ gray[2];
+    bin[1] = gray[3] ^ gray[2] ^ gray[1];
+    bin[0] = gray[3] ^ gray[2] ^ gray[1] ^ gray[0];
+    return  bin;
+endfunction
+
+- automatic: Tells the simulator to allocate local variables dynamically on the stack each time the function is called. 
+This makes the function re-entrant and safe to use if called concurrently by multiple processes or in recursive designs.
+- logic [3:0]: The return type of the function is a 4-bit vector.
+- gray2bin: The name of the function.
+- input logic [3:0] gray: The function accepts one 4-bit input named gray
+    - The input keyword explicitly tells the compiler that the function is receiving a copy of a value to read from, protecting your outside signals from unintended modifications.
+    - like C-style function
+- reference Ex: ref logic [7:0] data_bus
+    - This can be changed in real time like a C-style ref 
+    
+    
+Notes
+
+Use cases:
+Are primarily used for combinational math, data manipulation, or testbench utilities
+
+Syntax:
+
+function <return_type> <function_name> (<argument_list>);
+    // Local variable declarations
+    // Execution logic
+    return <expression>; 
+endfunction
+
+Example:
+
+module tb;
+    // Function definition
+    function int calc_sum(int a, int b);
+        return a + b; // Explicitly returns the value
+    endfunction
+
+initial begin
+    int result;
+    result = calc_sum(10, 5);
+    $display("Sum is: %0d", result); // Outputs: Sum is: 15
+end
+endmodule

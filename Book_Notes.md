@@ -11,6 +11,8 @@
 - Shift register
     - reg [1:0] sync_ff = 2'b00;
     - sync_regs <= {sync_ff[0], async_in};
+- Functions
+    - See Misc_Notes/Verilog_Functions.txt
 
 ## Docker
 
